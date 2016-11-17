@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="MyFirstSelenium" />
+        <module name="Software-Testing-Mt-Project" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="MyFirstSelenium" target="1.5" />
+      <module name="Software-Testing-Mt-Project" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

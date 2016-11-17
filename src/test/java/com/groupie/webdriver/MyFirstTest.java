@@ -45,7 +45,7 @@ public class MyFirstTest {
         driver.get(baseUrl + "/");
         String homePage = driver.getWindowHandle();
         System.out.println(homePage);
-        char[] alfabe = new char[31];
+        char alfabe[] = "ABCÇDEFGHIİJKLMNOÖPRSŞTUÜVWXYZ".toCharArray();
 
 
         driver.findElement(By.linkText("Giriş Yap")).click();
