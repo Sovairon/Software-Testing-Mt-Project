@@ -103,13 +103,16 @@ public class MyFirstTest {
 
 
 
+
+        int divCount = 0;
         for(int i = 2; i < 33; i++) {
             String item = String.valueOf(driver.findElement(By.xpath("//*[@id=\"brandsPaging\"]/div[1]/span[" + i +"]")));
             driver.findElement(By.xpath("//*[@id=\"brandsPaging\"]/div[1]/span[" + i +"]")).click();
             List<WebElement> totalDiv = driver.findElements(By.xpath("//*[@id=\"authorsList\"]/div"));
             for (WebElement numberOfDiv: totalDiv) {
                 divCount++;
-                for (int j = 1; j < a; j++) {
+
+                for (int j = 1; j < divCount; j++) {
                     findElements("//*[@id=\"authorsList\"]/div[" + j + "]/ul/li", alfabe[i-2]);
                 }
             }
@@ -124,25 +127,20 @@ public class MyFirstTest {
 
     }
 
-    private void findElements(String xpath1, String xpath2, String xpath3, String xpath4, char alphabet) {
+    private void findElements(String xpath1, char alphabet) {
+
+        //assertEquals(80, (allElementsColumn1.size()));
         List<WebElement> allElementsColumn1 = driver.findElements(By.xpath(xpath1));
-        List<WebElement> allElementsColumn2 = driver.findElements(By.xpath(xpath2));
-        List<WebElement> allElementsColumn3 = driver.findElements(By.xpath(xpath3));
-        List<WebElement> allElementsColumn4 = driver.findElements(By.xpath(xpath4));
-        allElementsColumn1.addAll(allElementsColumn2);
-        allElementsColumn1.addAll(allElementsColumn3);
-        allElementsColumn1.addAll(allElementsColumn4);
-
-        assertEquals(80, (allElementsColumn1.size()));
         boolean flag = false;
-
+        int a = 0;
         for (WebElement element : allElementsColumn1) {
             flag = element.getText().charAt(0) == alphabet;
+            a++;
         }
 
         try {
             if(flag == true)
-                System.out.print("YOU ARE TRUE MY FRIEND.");
+                System.out.println("True - " + a + "Lines");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -194,4 +192,3 @@ public class MyFirstTest {
 
 
 }
-
