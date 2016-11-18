@@ -106,10 +106,14 @@ public class MyFirstTest {
         for(int i = 2; i < 33; i++) {
             String item = String.valueOf(driver.findElement(By.xpath("//*[@id=\"brandsPaging\"]/div[1]/span[" + i +"]")));
             driver.findElement(By.xpath("//*[@id=\"brandsPaging\"]/div[1]/span[" + i +"]")).click();
-            findElements("//*[@id=\"authorsList\"]/div[1]/ul/li" , "//*[@id=\"authorsList\"]/div[2]/ul/li",
-                    "//*[@id=\"authorsList\"]/div[3]/ul/li", "//*[@id=\"authorsList\"]/div[4]/ul/li", item.charAt(i));
-            driver.findElement(By.xpath("//*[@id=\"brandsPaging\"]/div[1]/span[" + i +"]")).click();
-            System.out.println(item.charAt(i));
+            List<WebElement> totalDiv = driver.findElements(By.xpath("//*[@id=\"authorsList\"]/div"));
+            for (WebElement numberOfDiv: totalDiv) {
+                divCount++;
+                for (int j = 1; j < a; j++) {
+                    findElements("//*[@id=\"authorsList\"]/div[" + j + "]/ul/li", alfabe[i-2]);
+                }
+            }
+            divCount = 0;
         }
 
 
