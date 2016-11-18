@@ -13,6 +13,7 @@ import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -41,7 +42,7 @@ public class MyFirstTest {
 
     @Test
     public void testMyFirst() throws Exception {
-        //driver.manage().window().maximize();
+        driver.manage().window().maximize();
         driver.get(baseUrl + "/");
         String homePage = driver.getWindowHandle();
         System.out.println(homePage);
@@ -94,17 +95,33 @@ public class MyFirstTest {
 
         driver.switchTo().window(homePage);
 
+        WebElement uname = driver.findElement(By.xpath("//*[@id=\"header\"]/div/div/div[2]/div[2]/div[1]/div[1]/a[2]"));
+        assertEquals(uname.getText(), "Seleniumtesting Midterm");
+        WebElement k1 = driver.findElement(By.cssSelector("#contentMain > div > nav > ul > li:nth-child(8) > a"));
+        WebElement k2 = driver.findElement(By.cssSelector("#contentMain > div > nav > ul > li:nth-child(8) > div > ul > li:nth-child(1) > a"));
+        Actions builder = new Actions(driver);
+        //ONEMLI
+        //builder.moveToElement(k1).moveToElement(k2).click().build().perform();
+        //ONEMLI: Bazen cok hizli aciliyor o yuzden calismayabiliyor ve baska bir cozum bulamadim direk Kitap'a tiklayabilmek icin
+        //Isterseniz Temporary Fix i kullanabilirsiniz.
+
+        //Temporary Fix
         driver.findElement(By.xpath("//*[@id=\"contentMain\"]/div/nav/ul/li[8]/a")).click();
         driver.findElement(By.xpath("//*[@id=\"contentCategory\"]/div/div[2]/div[1]/ul/li[1]/a")).click();
+        //Temporary Fix
+
+        WebElement k3 = driver.findElement(By.xpath("//*[@id=\"breadCrumb\"]/ul/li[3]/a/span"));
+        assertEquals(k3.getText(), "Kitap");
+
         driver.findElement(By.xpath("//*[@id=\"contentListing\"]/div/div/div[2]/section[3]/h2/a")).click();
 
-        //*[@id="authorsList"]/div[1]/ul/li[1]/a
-
-
-
-
+        WebElement k4 = driver.findElement(By.xpath("//*[@id=\"breadCrumb\"]/ul/li[4]/a/span"));
+        assertEquals(k4.getText(), "Yazarlar");
 
         int divCount = 0;
+
+        //NOT: A dan Z ye tum alfabenin gorunmesi icin for dongusunun 31 kez donmesi gerekiyor fakat sonuncuda anlamadigim
+        //sebepten dolayi fail veriyor. 32 ye cekildiginde pass oluyor cozemedim.
         for(int i = 2; i < 33; i++) {
             String item = String.valueOf(driver.findElement(By.xpath("//*[@id=\"brandsPaging\"]/div[1]/span[" + i +"]")));
             driver.findElement(By.xpath("//*[@id=\"brandsPaging\"]/div[1]/span[" + i +"]")).click();
@@ -120,16 +137,10 @@ public class MyFirstTest {
         }
 
 
-
-
-
-
-
     }
 
     private void findElements(String xpath1, char alphabet) {
 
-        //assertEquals(80, (allElementsColumn1.size()));
         List<WebElement> allElementsColumn1 = driver.findElements(By.xpath(xpath1));
         boolean flag = false;
         int a = 0;
@@ -140,7 +151,7 @@ public class MyFirstTest {
 
         try {
             if(flag == true)
-                System.out.println("True - " + a + "Lines");
+                System.out.println("True - " + a + " Lines");
         } catch (Exception e) {
             e.printStackTrace();
         }
